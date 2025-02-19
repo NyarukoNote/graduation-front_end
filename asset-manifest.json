@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/graduation-front_end/static/css/main.63c5baee.css",
+    "main.js": "/graduation-front_end/static/js/main.26c19c06.js",
+    "static/media/index.cjs": "/graduation-front_end/static/media/index.a02930182e698c6507fb.cjs",
+    "index.html": "/graduation-front_end/index.html",
+    "static/media/en-US.cjs": "/graduation-front_end/static/media/en-US.c3a6319ea4f219498e6f.cjs",
+    "main.63c5baee.css.map": "/graduation-front_end/static/css/main.63c5baee.css.map",
+    "main.26c19c06.js.map": "/graduation-front_end/static/js/main.26c19c06.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.63c5baee.css",
+    "static/js/main.26c19c06.js"
+  ]
+}
