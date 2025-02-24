@@ -25,3 +25,23 @@
   cursor: pointer;
   color: #003580;
 }
+
+.logoContainer {
+  display: flex;
+  align-items: flex-start;
+}
+
+.logoImage {
+  width: 30px; /* 원하는 크기로 조정하세요 */
+  height: auto;
+  margin-right: 10px; /* 로고와 텍스트 사이의 간격 */
+}
+
+.logoContainer,
+.logoContainer:link,
+.logoContainer:visited,
+.logoContainer:hover,
+.logoContainer:active {
+  color: inherit; /* 또는 원하는 색상 */
+  text-decoration: none;
+}

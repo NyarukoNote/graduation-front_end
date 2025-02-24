@@ -1,72 +1,43 @@
-body {
-    background-color: #f0f8ff; /* 연한 파란색 배경 */
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .motel-page {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-  }
-  
-  h1 {
-    color: #0056b3; /* 진한 파란색 */
-    border-bottom: 2px solid #0056b3;
-    padding-bottom: 10px;
-  }
-  
-  h2 {
-    color: #0056b3;
-    margin-top: 20px;
-  }
-  
-  .motel-info {
-    background-color: #e6f2ff; /* 매우 연한 파란색 */
-    padding: 15px;
-    border-radius: 5px;
-    margin-bottom: 20px;
-    border: 1px solid #b3d9ff;
-  }
-  
-  .motel-info p {
-    margin: 10px 0;
-  }
-  
-  .motel-amenities ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .motel-amenities li {
-    margin-bottom: 5px;
-    padding: 5px 10px;
-    background-color: #e6f2ff;
-    border-radius: 3px;
-    display: inline-block;
-    margin-right: 10px;
-  }
-  
-  .motel-description {
-    line-height: 1.6;
-    background-color: #f8fbff; /* 매우 연한 파란색 */
-    padding: 15px;
-    border-radius: 5px;
-    border: 1px solid #d1e5ff;
-  }
-  
-  strong {
-    color: #003366; /* 진한 파란색 */
-  }
-  
-  /* 반응형 디자인을 위한 미디어 쿼리 */
-  @media (max-width: 600px) {
-    .motel-page {
-      margin: 10px;
-      padding: 15px;
-    }
-  }
+.motel-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.motel-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.motel-item {
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.motel-item img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.pagination {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.pagination button {
+  margin: 0 5px;
+  padding: 5px 10px;
+  background-color: #f0f0f0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.pagination button:hover {
+  background-color: #ddd;
+}
