@@ -27,7 +27,7 @@ const MotelPage = () => {
           address: "서울시 마포구 67-89",
           rating: 4.2,
           price: 45000,
-          image: "https://via.placeholder.com/150"
+          image: "/img/example2.jpg"
         },
         // ... 더 많은 모텔 데이터 추가 (최소 6개 이상)
       ];

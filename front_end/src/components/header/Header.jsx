@@ -1,10 +1,4 @@
 import React, { useState } from 'react';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faBed,
-  faCar,
-  faTaxi
-} from "@fortawesome/free-solid-svg-icons";
 import { useNavigate, Link } from "react-router-dom";
 import "./header.css";
 
@@ -22,17 +16,17 @@ const Header = ({ activeItem }) => {
       <div className="headerContainer">
         <div className="headerList">
           <Link to="/motel" className={`headerListItem ${activeItem === 'stays' ? 'active' : ''}`}>
-            <FontAwesomeIcon icon={faBed} />
-            <span>Stays</span>
+            <img src={"/icon/icon_list.svg"} className="icon"  />
+            <span>모텔 목록</span>
           </Link>
-          <div className="headerListItem">
-            <FontAwesomeIcon icon={faCar} />
-            <span>Car rentals</span>
-          </div>
-          <div className="headerListItem">
-            <FontAwesomeIcon icon={faTaxi} />
-            <span>Airport taxis</span>
-          </div>
+          <Link to="/motelcomparison" className={`headerListItem ${activeItem === 'comparison' ? 'active' : ''}`}>
+            <img src={"/icon/icon_scale.svg"} className="icon"  />
+            <span>모텔 비교</span>
+          </Link>
+          <Link to="/aichatbot" className={`headerListItem ${activeItem === 'AI' ? 'active' : ''}`}>
+            <img src={"/icon/icon_AI.svg"} className="icon"  />
+            <span>Ai 챗봇</span>
+          </Link>
         </div>
         <div className="headerSearch">
           <div className="headerSearchItem">
