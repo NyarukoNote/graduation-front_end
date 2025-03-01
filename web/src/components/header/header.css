@@ -3,24 +3,36 @@
   color: white;
   display: flex;
   justify-content: center;
+  align-items: center;
   position: relative;
+  padding: 10px;
 }
 
 .headerContainer {
   width: 100%;
   max-width: 1024px;
   margin: 10px 0px 30px 0px;
+  display: flex;
+  flex-direction: column;
 }
 
 .icon {
-  width: 30px;  /* 원하는 픽셀 값으로 조정 */
-  height: 30px; /* 원하는 픽셀 값으로 조정 */
+  width: 30px;
+  height: 30px;
+}
+
+/* ✅ 검색바와 리스트를 감싸는 컨테이너 */
+.headerTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
 .headerList {
   display: flex;
-  gap: 50px;
-  margin-bottom: 0px;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
 .headerListItem {
@@ -29,6 +41,7 @@
   gap: 10px;
   cursor: pointer;
   padding: 10px;
+  white-space: nowrap;
 }
 
 .headerListItem.active {
@@ -41,50 +54,79 @@
 .headerListItem:visited,
 .headerListItem:hover,
 .headerListItem:active {
-  color: white;  /* 또는 원하는 색상 */
+  color: white;
   text-decoration: none;
 }
 
-
-
+/* ✅ 검색바를 가로 정렬 */
 .headerSearch {
-  height: 30px;
   background-color: white;
   border: 3px solid #febb02;
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  padding: 10px 0px;
+  padding: 5px;
   border-radius: 5px;
-  position: absolute;
-  top: 00px;
-  right: 20px;
-  width: 300px;
+  width: 400px;
+  justify-content: space-between;
 }
 
-.headerSearchItem {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.headerSearchInput {
-  border: none;
-  outline: none;
-}
-
+/* ✅ 검색 옵션 (이름/주소 선택) */
 .headerSearchSelect {
   border: none;
   outline: none;
+  padding: 5px;
+  background-color: white;
+  cursor: pointer;
 }
 
+/* ✅ 검색 입력 바 */
+.headerSearchInput {
+  border: none;
+  outline: none;
+  width: 98%;
+  padding: 5px;
+}
+
+/* ✅ 검색 버튼 */
 .headerBtn {
   background-color: #0071c2;
   color: white;
   font-weight: 500;
   border: none;
-  padding: 10px;
+  padding: 8px 15px;
   cursor: pointer;
+  border-radius: 5px;
 }
 
+/* ✅ 검색 입력 바를 적절한 크기로 설정 */
+.searchInputContainer {
+  flex: 1;
+  margin: 0 5px;
+}
 
+/* 📌 반응형: 화면이 작아지면 검색바가 아래로 이동 */
+@media (max-width: 768px) {
+  .headerTop {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .headerSearch {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+    gap: 10px;
+  }
+
+  .headerSearchItem {
+    width: 100%;
+  }
+
+  .headerSearchSelect,
+  .headerSearchInput,
+  .headerBtn {
+    width: 100%;
+  }
+}
