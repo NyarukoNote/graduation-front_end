@@ -17,7 +17,7 @@ const CustomNextArrow = ({ onClick }) => (
 
 const ImageSlider = ({ images }) => {
   const settings = {
-    dots: true,
+    dots: true, // ✅ 하단 점 네비게이션 표시
     infinite: true,
     speed: 500,
     slidesToShow: 1,
@@ -25,14 +25,17 @@ const ImageSlider = ({ images }) => {
     arrows: true,
     prevArrow: <CustomPrevArrow />,
     nextArrow: <CustomNextArrow />,
+    adaptiveHeight: false, // ✅ 슬라이더 높이 변경 방지
+    draggable: false, // ✅ 스크롤로 넘기기 방지 (버튼으로만 이동)
+    appendDots: dots => <div className="custom-dots-container">{dots}</div> // ✅ 점 네비게이션을 이미지 아래 배치
   };
 
   return (
     <div className="motel-slider">
       <Slider {...settings}>
         {images.map((image, index) => (
-          <div key={index}>
-            <img src={image} alt={`Motel Image ${index + 1}`} />
+          <div key={index} className="slide-item">
+            <img src={image} alt={`Motel Image ${index + 1}`} className="slide-image" />
           </div>
         ))}
       </Slider>

@@ -10,6 +10,7 @@ import MotelPage from "./pages/motelpage/Motelpage";
 import MotelDetailPage from './pages/moteldetailpage/Moteldetailpage';
 import MotelComparison from "./pages/motelcomparison/MotelComparison";
 import AIChatbot from "./pages/aichatbot/Aichatbot";
+import TourInfo from "./pages/tourinfo/Tourinfo";
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
         <Route path="/motel/:id" element={<MotelDetailPage />} />
         <Route path="/motelcomparison" element={<MotelComparison />} />
         <Route path="/aichatbot" element={<AIChatbot />} />
+        <Route path="/tourinfo" element={<TourInfo />} />
       </Routes>
     </BrowserRouter>
   );

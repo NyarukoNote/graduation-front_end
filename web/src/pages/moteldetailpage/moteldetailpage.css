@@ -99,3 +99,35 @@
     display: none; /* Chrome, Safari에서 스크롤바 숨김 */
   }
   
+  .motel-links {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .motel-links button {
+    margin: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .motel-links img {
+    width: 30px; /* 이미지 크기 조절 */
+    height: auto;
+  }
+
+  .naver-button {
+    background-color: #03C75A;
+    color: white;
+  }
+  
+  .yeogi-button {
+    background-color: #FF5A5F;
+    color: white;
+  }
+  
+  .motel-links button:hover {
+    opacity: 0.8;
+  }

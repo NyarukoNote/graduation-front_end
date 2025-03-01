@@ -27,6 +27,10 @@ const Header = ({ activeItem }) => {
             <img src={"/icon/icon_AI.svg"} className="icon"  />
             <span>Ai 챗봇</span>
           </Link>
+          <Link to="/tourinfo" className={`headerListItem ${activeItem === 'tour' ? 'active' : ''}`}>
+            <img src={"/icon/icon_tour.svg"} className="icon"  />
+            <span>관광 정보</span>
+          </Link>
         </div>
         <div className="headerSearch">
           <div className="headerSearchItem">

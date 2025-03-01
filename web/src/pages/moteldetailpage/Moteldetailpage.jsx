@@ -7,6 +7,7 @@ import ImageSlider from '../../components/imageslider/ImageSlider';
 import Review from '../../components/review/Review'; 
 import './moteldetailpage.css';
 
+
 const MotelDetailPage = () => {
   const [motel, setMotel] = useState(null);
   const { id } = useParams();
@@ -35,7 +36,9 @@ const MotelDetailPage = () => {
         reviews: [
           { user: "김철수", rating: 5, comment: "매우 깨끗하고 편안했습니다." },
           { user: "이영희", rating: 4, comment: "위치가 좋고 서비스도 친절해요." }
-        ]
+        ],
+        naverPlaceUrl: "https://map.naver.com/v5/search/편안한%20휴식%20모텔",
+        yeogiEottaeUrl: "https://www.goodchoice.kr/product/search/2/서울시%20중구%20을지로%2030"
       };
       setMotel(dummyData);
     };
@@ -96,6 +99,24 @@ const MotelDetailPage = () => {
         <div className="motel-map">
           <h2>위치</h2>
           <MapComponent latitude={motel.latitude} longitude={motel.longitude} />
+        </div>
+
+        {/* ✅ 네이버 플레이스 & 여기어때 이동 버튼 */}
+        <div className="motel-links">
+          <h2>더 많은 정보</h2>
+          <button 
+          
+            className="naver-button" 
+            onClick={() => window.open(motel.naverPlaceUrl, "_blank")}
+          >
+            <img src="/img/naver.png" alt="네이버" /> 네이버 플레이스로 이동
+          </button>
+          <button 
+            className="yeogi-button" 
+            onClick={() => window.open(motel.yeogiEottaeUrl, "_blank")}
+          >
+            <img src="/img/yeogi.png" alt="여기어때" /> 여기어때에서 보기
+          </button>
         </div>
       </div>
     </div>
