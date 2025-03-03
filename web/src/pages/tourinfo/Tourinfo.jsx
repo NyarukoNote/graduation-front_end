@@ -1,29 +1,34 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ReactPaginate from "react-paginate";
-import "./tourinfo.css"; 
+import { useNavigate } from "react-router-dom"; // 🔹 추가
+import "./tourinfo.css";
 import Header from "../../components/header/Header";
 import Navbar from "../../components/navbar/Navbar";
+import ImageSlider from "../../components/imageslider/ImageSlider";
 
 const Tourinfo = () => {
   const [data, setData] = useState([]);
   const [query, setQuery] = useState("");
-  const [currentSearch, setCurrentSearch] = useState("서울"); // ✅ 현재 검색어 저장
+  const [currentSearch, setCurrentSearch] = useState("서울");
   const [loading, setLoading] = useState(false);
-  const [currentPage, setCurrentPage] = useState(0); 
-  const itemsPerPage = 6; 
-  const API_KEY = "9FPZnm0Ph3Zpi7Zv9vdaOR%2Bmwg8GQ5BW1J%2BtPAgEpJdPRaL583suCrFEI45ZgVvYqHqUea8p4tHoXRHzW43BxQ%3D%3D"; 
+  const [currentPage, setCurrentPage] = useState(0);
+  const itemsPerPage = 6;
+  const navigate = useNavigate(); 
+  const API_KEY = process.env.REACT_APP_API_KEY;
 
   const fetchData = async (searchQuery) => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `https://apis.data.go.kr/B551011/KorService1/searchKeyword1?serviceKey=${API_KEY}&keyword=${searchQuery}&MobileOS=ETC&MobileApp=AppTest&_type=json`
+        `https://apis.data.go.kr/B551011/KorService1/searchKeyword1?serviceKey=${API_KEY}&keyword=${searchQuery}&MobileOS=ETC&MobileApp=AppTest&_type=json&numOfRows=1000`
       );
+      console.log(process.env.REACT_APP_API_KEY);
+
+      console.log("🔍 API 응답 데이터:", response.data);
       
-      console.log("🔍 API 응답 데이터:", response.data); // ✅ 콘솔에 데이터 출력
       setData(response.data.response.body.items.item || []);
-      setCurrentSearch(searchQuery); // ✅ 현재 검색어 업데이트
+      setCurrentSearch(searchQuery);
     } catch (error) {
       console.error("Error fetching data:", error);
       setData([]);
@@ -37,6 +42,7 @@ const Tourinfo = () => {
 
   const handleSearch = () => {
     if (query.trim()) {
+      setCurrentSearch(query);
       fetchData(query);
       setCurrentPage(0);
     }
@@ -66,7 +72,6 @@ const Tourinfo = () => {
           <button onClick={handleSearch}>검색</button>
         </div>
 
-        {/* ✅ 현재 검색 중인 키워드 표시 */}
         <p className="current-search">🔎 현재 검색: <strong>{currentSearch}</strong></p>
 
         {loading ? (
@@ -76,7 +81,11 @@ const Tourinfo = () => {
             <div className="catalog">
               {currentItems.length > 0 ? (
                 currentItems.map((item) => (
-                  <div key={item.contentid} className="catalog-item">
+                  <div
+                    key={item.contentid}
+                    className="catalog-item"
+                    onClick={() => navigate(`/tour/${item.contentid}`)} // 🔹 클릭 시 상세 페이지 이동
+                  >
                     <img
                       src={item.firstimage ? item.firstimage : "/img/default.png"}
                       alt={item.title}

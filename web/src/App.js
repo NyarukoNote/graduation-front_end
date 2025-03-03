@@ -11,6 +11,7 @@ import MotelDetailPage from './pages/moteldetailpage/Moteldetailpage';
 import MotelComparison from "./pages/motelcomparison/MotelComparison";
 import AIChatbot from "./pages/aichatbot/Aichatbot";
 import TourInfo from "./pages/tourinfo/Tourinfo";
+import TourDetail from "./pages/tourdetail/Tourdetail";
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
         <Route path="/motelcomparison" element={<MotelComparison />} />
         <Route path="/aichatbot" element={<AIChatbot />} />
         <Route path="/tourinfo" element={<TourInfo />} />
+        <Route path="/tour/:contentid" element={<TourDetail />} />
       </Routes>
     </BrowserRouter>
   );
