@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom"; // ✅ useNavigate 추가
+import { useParams, useNavigate } from "react-router-dom"; 
 import axios from "axios";
 import Navbar from "../../components/navbar/Navbar";
 import Header from "../../components/header/Header";
 import ImageSlider from "../../components/imageslider/ImageSlider"; 
 import "./tourdetail.css";
-import { fetchCategoryName } from "../../utils/fetchCategoryName";
+import { getCategoryName } from "../../utils/fetchCategoryName"; // ✅ 수정된 함수 사용
 
 const TourDetail = () => {
-  const { contentid } = useParams(); // URL에서 contentid 가져오기
+  const { contentid } = useParams(); 
   const [detail, setDetail] = useState(null);
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -20,16 +20,18 @@ const TourDetail = () => {
     const fetchDetailData = async () => {
       setLoading(true);
       try {
-        // ✅ 상세 정보 가져오기
-        const detailResponse = await axios.get(
-          `https://apis.data.go.kr/B551011/KorService1/detailCommon1?serviceKey=${API_KEY}&contentId=${contentid}&MobileOS=ETC&MobileApp=AppTest&_type=json&defaultYN=Y&overviewYN=Y&catcodeYN=Y&addrinfoYN=Y&firstImageYN=Y`
-        );
+        // ✅ API 요청을 병렬로 실행
+        const [detailResponse, imageResponse] = await Promise.all([
+          axios.get(
+            `https://apis.data.go.kr/B551011/KorService1/detailCommon1?serviceKey=${API_KEY}&contentId=${contentid}&MobileOS=ETC&MobileApp=AppTest&_type=json&defaultYN=Y&overviewYN=Y&catcodeYN=Y&addrinfoYN=Y&firstImageYN=Y`
+          ),
+          axios.get(
+            `https://apis.data.go.kr/B551011/KorService1/detailImage1?serviceKey=${API_KEY}&contentId=${contentid}&MobileOS=ETC&MobileApp=AppTest&_type=json&imageYN=Y&subImageYN=Y`
+          ),
+        ]);
+
         setDetail(detailResponse.data.response.body.items.item[0]);
 
-        // ✅ 이미지 리스트 가져오기
-        const imageResponse = await axios.get(
-          `https://apis.data.go.kr/B551011/KorService1/detailImage1?serviceKey=${API_KEY}&contentId=${contentid}&MobileOS=ETC&MobileApp=AppTest&_type=json&imageYN=Y&subImageYN=Y`
-        );
         const imageItems = imageResponse.data.response.body.items.item || [];
         setImages(imageItems.map((img) => img.originimgurl));
       } catch (error) {
@@ -42,14 +44,14 @@ const TourDetail = () => {
   }, [contentid]);
 
   useEffect(() => {
-    const getCategory = async () => {
+    const fetchCategory = async () => {
       if (detail?.cat1 && detail?.cat2 && detail?.cat3) {
-        const name = await fetchCategoryName(detail.cat1, detail.cat2, detail.cat3);
+        const name = await getCategoryName(detail.cat1, detail.cat2, detail.cat3); // ✅ JSON 캐싱 활용
         setCategoryName(name);
       }
     };
-  
-    getCategory();
+
+    fetchCategory();
   }, [detail?.cat1, detail?.cat2, detail?.cat3]);
 
   if (loading) return <p>로딩 중...</p>;
