@@ -1,15 +1,18 @@
 {
   "files": {
-    "main.css": "/graduation-front_end/static/css/main.63c5baee.css",
-    "main.js": "/graduation-front_end/static/js/main.26c19c06.js",
-    "static/media/index.cjs": "/graduation-front_end/static/media/index.a02930182e698c6507fb.cjs",
+    "main.css": "/graduation-front_end/static/css/main.c2b17b88.css",
+    "main.js": "/graduation-front_end/static/js/main.41d7971c.js",
+    "static/media/herobackground.jpg": "/graduation-front_end/static/media/herobackground.f6f4639c85cea7e6d11c.jpg",
+    "static/media/slick.svg": "/graduation-front_end/static/media/slick.2630a3e3eab21c607e21.svg",
+    "static/media/slick.eot": "/graduation-front_end/static/media/slick.a4e97f5a2a64f0ab1323.eot",
+    "static/media/slick.ttf": "/graduation-front_end/static/media/slick.c94f7671dcc99dce43e2.ttf",
+    "static/media/slick.woff": "/graduation-front_end/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/graduation-front_end/index.html",
-    "static/media/en-US.cjs": "/graduation-front_end/static/media/en-US.c3a6319ea4f219498e6f.cjs",
-    "main.63c5baee.css.map": "/graduation-front_end/static/css/main.63c5baee.css.map",
-    "main.26c19c06.js.map": "/graduation-front_end/static/js/main.26c19c06.js.map"
+    "main.c2b17b88.css.map": "/graduation-front_end/static/css/main.c2b17b88.css.map",
+    "main.41d7971c.js.map": "/graduation-front_end/static/js/main.41d7971c.js.map"
   },
   "entrypoints": [
-    "static/css/main.63c5baee.css",
-    "static/js/main.26c19c06.js"
+    "static/css/main.c2b17b88.css",
+    "static/js/main.41d7971c.js"
   ]
 }
