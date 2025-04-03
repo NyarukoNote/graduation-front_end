@@ -21,7 +21,7 @@
   height: 30px;
 }
 
-/* ✅ 검색바와 리스트를 감싸는 컨테이너 */
+/* ✅ 검색바 제거 및 리스트 스타일 유지 */
 .headerTop {
   display: flex;
   justify-content: space-between;
@@ -33,6 +33,7 @@
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
+  position: relative;
 }
 
 .headerListItem {
@@ -42,6 +43,7 @@
   cursor: pointer;
   padding: 10px;
   white-space: nowrap;
+  position: relative;
 }
 
 .headerListItem.active {
@@ -58,75 +60,68 @@
   text-decoration: none;
 }
 
-/* ✅ 검색바를 가로 정렬 */
-.headerSearch {
-  background-color: white;
-  border: 3px solid #febb02;
+/* ✅ 관광 정보 드롭다운 스타일 */
+.tourMenu {
+  position: relative;
+}
+
+.tourMenu.active {
+  border-radius: 20px;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.tourDropdown {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 100%; /* 아래쪽으로 배치 */
+  background-color: #003580; /* 배경을 파란색으로 변경 */
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  width: 180px;
+  display: none;
+  flex-direction: column;
+  padding: 10px 0;
+}
+
+.tourMenu:hover .tourDropdown,
+.tourMenu.active .tourDropdown {
   display: flex;
-  align-items: center;
-  padding: 5px;
-  border-radius: 5px;
-  width: 400px;
-  justify-content: space-between;
 }
 
-/* ✅ 검색 옵션 (이름/주소 선택) */
-.headerSearchSelect {
-  border: none;
-  outline: none;
-  padding: 5px;
-  background-color: white;
+.dropdownItem {
+  padding: 10px;
+  text-align: center;
+  color: white; /* 글자색을 하얀색으로 변경 */
+  text-decoration: none;
   cursor: pointer;
 }
 
-/* ✅ 검색 입력 바 */
-.headerSearchInput {
-  border: none;
-  outline: none;
-  width: 98%;
-  padding: 5px;
+.dropdownItem:hover {
+  background-color: skyblue;
+  color: black;
 }
 
-/* ✅ 검색 버튼 */
-.headerBtn {
-  background-color: #0071c2;
+/* ✅ 방문한 링크 스타일 제거 */
+.dropdownItem:visited {
   color: white;
-  font-weight: 500;
-  border: none;
-  padding: 8px 15px;
-  cursor: pointer;
-  border-radius: 5px;
 }
 
-/* ✅ 검색 입력 바를 적절한 크기로 설정 */
-.searchInputContainer {
-  flex: 1;
-  margin: 0 5px;
-}
-
-/* 📌 반응형: 화면이 작아지면 검색바가 아래로 이동 */
+/* 📌 반응형: 화면이 작아지면 메뉴가 아래로 쌓임 */
 @media (max-width: 768px) {
   .headerTop {
     flex-direction: column;
     align-items: center;
   }
 
-  .headerSearch {
+  .headerList {
     flex-direction: column;
-    align-items: stretch;
-    width: 100%;
-    max-width: 400px;
-    padding: 10px;
+    align-items: center;
     gap: 10px;
   }
 
-  .headerSearchItem {
-    width: 100%;
-  }
-
-  .headerSearchSelect,
-  .headerSearchInput,
-  .headerBtn {
-    width: 100%;
+  .tourDropdown {
+    width: 160px;
   }
 }

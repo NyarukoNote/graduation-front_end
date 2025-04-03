@@ -18,7 +18,6 @@ const Tourinfo = () => {
   const navigate = useNavigate();
   const API_KEY = process.env.REACT_APP_API_KEY;
 
-  /** 🟢 관광지 정보 가져오기 */
   const fetchData = async (searchQuery) => {
     setLoading(true);
     try {
@@ -53,20 +52,22 @@ const Tourinfo = () => {
   const offset = currentPage * itemsPerPage;
   const currentItems = data.slice(offset, offset + itemsPerPage);
 
-  /** 🟢 현재 페이지 아이템의 분류명 가져오기 */
   useEffect(() => {
     const fetchCategoryNamesForCurrentPage = async () => {
       const newCategoryNames = { ...categoryNames };
 
-      // ✅ 현재 페이지에서 분류명이 없는 아이템만 조회
       const itemsToFetch = currentItems.filter(
-        (item) => item.cat1 && item.cat2 && item.cat3 && !newCategoryNames[item.contentid]
+        (item) =>
+          item.cat1 &&
+          item.cat2 &&
+          item.cat3 &&
+          !newCategoryNames[item.contentid]
       );
 
-      if (itemsToFetch.length === 0) return; // ✅ 이미 모든 분류가 존재하면 API 요청하지 않음
+      if (itemsToFetch.length === 0) return;
 
       const fetchPromises = itemsToFetch.map(async (item) => {
-        const name = await getCategoryName(item.cat1, item.cat2, item.cat3); // ✅ JSON 기반 조회
+        const name = await getCategoryName(item.cat1, item.cat2, item.cat3);
         newCategoryNames[item.contentid] = name;
       });
 
@@ -96,7 +97,9 @@ const Tourinfo = () => {
           <button onClick={handleSearch}>검색</button>
         </div>
 
-        <p className="current-search">🔎 현재 검색: <strong>{currentSearch}</strong></p>
+        <p className="current-search">
+          🔎 현재 검색: <strong>{currentSearch}</strong>
+        </p>
 
         {loading ? (
           <p className="loading">로딩 중...</p>
@@ -111,7 +114,11 @@ const Tourinfo = () => {
                     onClick={() => navigate(`/tour/${item.contentid}`)}
                   >
                     <img
-                      src={item.firstimage ? item.firstimage : "/img/default.png"}
+                      src={
+                        item.firstimage
+                          ? item.firstimage
+                          : `${process.env.PUBLIC_URL}/img/default.png`
+                      }
                       alt={item.title}
                       className="catalog-image"
                     />

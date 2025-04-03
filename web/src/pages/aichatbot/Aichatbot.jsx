@@ -26,12 +26,15 @@ const AIChatbot = () => {
     setChatHistory(newChat);
 
     try {
-      const response = await fetch("http://127.0.0.1:5000/chat", {
+      const response = await fetch("http://192.168.0.96:5000/api/generate", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ message }),
+        body: JSON.stringify({
+          model: "gemma3:4b",
+          prompt: message,
+        }),
       });
 
       if (!response.ok) throw new Error("서버 응답 오류");
@@ -42,8 +45,6 @@ const AIChatbot = () => {
         ...newChat,
         { role: "assistant", content: data.response },
       ]);
-
-      
     } catch (error) {
       console.error("에러 발생:", error);
     }
@@ -51,7 +52,8 @@ const AIChatbot = () => {
 
   useEffect(() => {
     if (chatContainerRef.current) {
-      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+      chatContainerRef.current.scrollTop =
+        chatContainerRef.current.scrollHeight;
     }
   }, [chatHistory]);
 
@@ -71,7 +73,9 @@ const AIChatbot = () => {
         <div className="chat-box" ref={chatContainerRef}>
           {chatHistory.map((msg, index) => (
             <div key={index} className={`message ${msg.role}`}>
-              <span className="sender">{msg.role === "user" ? "👤 You" : "🤖 AI"}</span>
+              <span className="sender">
+                {msg.role === "user" ? "👤 You" : "🤖 AI"}
+              </span>
               <p className="message-content">{msg.content}</p>
             </div>
           ))}
@@ -85,7 +89,9 @@ const AIChatbot = () => {
             placeholder="메시지를 입력하세요..."
             className="chat-input"
           />
-          <button onClick={() => sendMessage()} className="send-button">보내기</button>
+          <button onClick={() => sendMessage()} className="send-button">
+            보내기
+          </button>
         </div>
       </div>
     </div>

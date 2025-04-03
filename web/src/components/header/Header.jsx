@@ -3,13 +3,8 @@ import { useNavigate, Link } from "react-router-dom";
 import "./header.css";
 
 const Header = ({ activeItem }) => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [searchType, setSearchType] = useState("name");
+  const [tourDropdown, setTourDropdown] = useState(false);
   const navigate = useNavigate();
-
-  const handleSearch = () => {
-    navigate("/hotels", { state: { searchTerm, searchType } });
-  };
 
   return (
     <div className="header">
@@ -17,49 +12,74 @@ const Header = ({ activeItem }) => {
         <div className="headerTop">
           {/* 메뉴 리스트 */}
           <div className="headerList">
-            <Link to="/motel" className={`headerListItem ${activeItem === 'stays' ? 'active' : ''}`}>
-              <img src={"/icon/icon_list.svg"} className="icon" />
+            <Link
+              to="/motel"
+              className={`headerListItem ${
+                activeItem === "stays" ? "active" : ""
+              }`}
+            >
+              <img
+                src={`${process.env.PUBLIC_URL}/icon/icon_list.svg`}
+                className="icon"
+                alt="list"
+              />
               <span>모텔 목록</span>
             </Link>
-            <Link to="/motelcomparison" className={`headerListItem ${activeItem === 'comparison' ? 'active' : ''}`}>
-              <img src={"/icon/icon_scale.svg"} className="icon" />
+            <Link
+              to="/motelcomparison"
+              className={`headerListItem ${
+                activeItem === "comparison" ? "active" : ""
+              }`}
+            >
+              <img
+                src={`${process.env.PUBLIC_URL}/icon/icon_scale.svg`}
+                className="icon"
+                alt="comparison"
+              />
               <span>모텔 비교</span>
             </Link>
-            <Link to="/aichatbot" className={`headerListItem ${activeItem === 'AI' ? 'active' : ''}`}>
-              <img src={"/icon/icon_AI.svg"} className="icon" />
+            <Link
+              to="/aichatbot"
+              className={`headerListItem ${
+                activeItem === "AI" ? "active" : ""
+              }`}
+            >
+              <img
+                src={`${process.env.PUBLIC_URL}/icon/icon_AI.svg`}
+                className="icon"
+                alt="AI Chatbot"
+              />
               <span>Ai 챗봇</span>
             </Link>
-            <Link to="/tourinfo" className={`headerListItem ${activeItem === 'tour' ? 'active' : ''}`}>
-              <img src={"/icon/icon_tour.svg"} className="icon" />
-              <span>관광 정보</span>
-            </Link>
-          </div>
 
-          {/* ✅ 검색바 */}
-          <div className="headerSearch">
-            <div className="headerSearchItem">
-              <select
-                value={searchType}
-                onChange={(e) => setSearchType(e.target.value)}
-                className="headerSearchSelect"
-              >
-                <option value="name">이름</option>
-                <option value="address">주소</option>
-              </select>
-            </div>
-            <div className="headerSearchItem searchInputContainer">
-              <input
-                type="text"
-                placeholder="검색하세요"
-                className="headerSearchInput"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
+            {/* 관광 정보 (드롭다운 메뉴 추가) */}
+            <div
+              className={`headerListItem tourMenu ${
+                activeItem === "tour" ? "active" : ""
+              }`}
+              onMouseEnter={() => setTourDropdown(true)}
+              onMouseLeave={() => setTourDropdown(false)}
+              onClick={() => navigate("/tourinfo")}
+            >
+              <img
+                src={`${process.env.PUBLIC_URL}/icon/icon_tour.svg`}
+                className="icon"
+                alt="tour info"
               />
-            </div>
-            <div className="headerSearchItem">
-              <button className="headerBtn" onClick={handleSearch}>
-                검색
-              </button>
+              <span>관광 정보</span>
+              {tourDropdown && (
+                <div className="tourDropdown">
+                  <Link to="/tourinfo" className="dropdownItem">
+                    이름으로 검색
+                  </Link>
+                  <Link to="/tourinfo/filter" className="dropdownItem">
+                    지역 및 분류로 검색
+                  </Link>
+                  <Link to="/tourinfo/course" className="dropdownItem">
+                    코스 검색
+                  </Link>
+                </div>
+              )}
             </div>
           </div>
         </div>

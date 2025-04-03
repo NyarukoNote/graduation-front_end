@@ -1,5 +1,6 @@
+import React, { useState } from "react";
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./imageslider.css"; // CSS 파일을 따로 관리
 
@@ -16,8 +17,10 @@ const CustomNextArrow = ({ onClick }) => (
 );
 
 const ImageSlider = ({ images }) => {
+  const [selectedImage, setSelectedImage] = useState(null); // 클릭된 이미지 상태 관리
+
   const settings = {
-    dots: true, // ✅ 하단 점 네비게이션 표시
+    dots: true,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
@@ -25,20 +28,49 @@ const ImageSlider = ({ images }) => {
     arrows: true,
     prevArrow: <CustomPrevArrow />,
     nextArrow: <CustomNextArrow />,
-    adaptiveHeight: false, // ✅ 슬라이더 높이 변경 방지
-    draggable: false, // ✅ 스크롤로 넘기기 방지 (버튼으로만 이동)
-    appendDots: dots => <div className="custom-dots-container">{dots}</div> // ✅ 점 네비게이션을 이미지 아래 배치
+    adaptiveHeight: false,
+    draggable: false,
+    appendDots: (dots) => <div className="custom-dots-container">{dots}</div>,
+  };
+
+  const handleImageClick = (image) => {
+    setSelectedImage(image); // 이미지 클릭 시 큰 이미지로 설정
+  };
+
+  const handleCloseModal = () => {
+    setSelectedImage(null); // 모달 닫기
   };
 
   return (
     <div className="motel-slider">
       <Slider {...settings}>
         {images.map((image, index) => (
-          <div key={index} className="slide-item">
-            <img src={image} alt={`Motel Image ${index + 1}`} className="slide-image" />
+          <div
+            key={index}
+            className="slide-item"
+            onClick={() => handleImageClick(image)}
+          >
+            <img
+              src={image}
+              alt={`Motel Image ${index + 1}`}
+              className="slide-image"
+            />
           </div>
         ))}
       </Slider>
+
+      {/* 모달 구현 */}
+      {selectedImage && (
+        <div className="image-modal" onClick={handleCloseModal}>
+          <div className="image-modal-content">
+            <img
+              src={selectedImage}
+              alt="Selected Motel"
+              className="modal-image"
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

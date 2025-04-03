@@ -1,25 +1,51 @@
 import React from "react";
-import { FaStar, FaRegStar } from "react-icons/fa";
+import "./review.css";
 
-const StarRating = ({ rating }) => {
-  const fullStars = Math.floor(rating);
-  const halfStar = rating - fullStars >= 0.5;
+const Review = ({ comment, sentiment, filter }) => {
+  // 필터가 존재하고 sentiment가 필터와 일치하지 않으면 해당 리뷰는 렌더링하지 않음
+  if (filter === "Positive") {
+    return (
+      <div className="review-card">
+        <p className="review-comment">"{comment}"</p>
+        <p className="positive">👍 긍정적 리뷰</p>
+      </div>
+    );
+  }
+
+  if (filter === "Neutral") {
+    return (
+      <div className="review-card">
+        <p className="review-comment">"{comment}"</p>
+        <p className="neutral">🤝 중립적 리뷰</p>
+      </div>
+    );
+  }
+
+  if (filter === "Negative") {
+    return (
+      <div className="review-card">
+        <p className="review-comment">"{comment}"</p>
+        <p className="negative">👎 부정적 리뷰</p>
+      </div>
+    );
+  }
 
   return (
-    <div className="star-rating">
-      {[...Array(fullStars)].map((_, i) => <FaStar key={i} className="star full" />)}
-      {halfStar && <FaStar className="star half" />}
-      {[...Array(5 - fullStars - (halfStar ? 1 : 0))].map((_, i) => <FaRegStar key={i} className="star empty" />)}
+    <div className="review-card">
+      <p className="review-comment">"{comment}"</p>
+      <div className="review-sentiment">
+        {sentiment === "Positive" ? (
+          <p className="positive">👍 긍정적 리뷰</p>
+        ) : sentiment === "Negative" ? (
+          <p className="negative">👎 부정적 리뷰</p>
+        ) : sentiment === "Neutral" ? (
+          <p className="neutral">🤝 중립적 리뷰</p>
+        ) : (
+          <p>🔍 분석되지 않음</p>
+        )}
+      </div>
     </div>
   );
 };
-
-const Review = ({ review }) => (
-  <div className="review">
-    <p><strong>{review.user}</strong></p>
-    <StarRating rating={review.rating} />
-    <p>{review.comment}</p>
-  </div>
-);
 
 export default Review;
