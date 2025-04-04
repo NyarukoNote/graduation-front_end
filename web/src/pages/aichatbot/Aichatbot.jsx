@@ -20,36 +20,37 @@ const AIChatbot = () => {
   const sendMessage = async (message = userInput) => {
     if (!message.trim()) return;
 
-    setUserInput("");
+    setUserInput(""); // 메시지 입력 필드 초기화
 
     const newChat = [...chatHistory, { role: "user", content: message }];
-    setChatHistory(newChat);
+    setChatHistory(newChat); // 채팅 내역에 사용자 메시지 추가
 
     try {
-      const response = await fetch("http://192.168.0.96:5000/api/generate", {
+      // 서버 API에 메시지 전송 (POST 요청)
+      const response = await fetch("http://127.0.0.1:5000/recommend", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          model: "gemma3:4b",
-          prompt: message,
+          query: message, // 사용자 입력을 query로 전송
         }),
       });
 
       if (!response.ok) throw new Error("서버 응답 오류");
 
-      const data = await response.json();
+      const data = await response.json(); // 서버 응답 데이터 받기
 
       setChatHistory([
         ...newChat,
-        { role: "assistant", content: data.response },
+        { role: "assistant", content: data.response }, // AI의 응답 추가
       ]);
     } catch (error) {
       console.error("에러 발생:", error);
     }
   };
 
+  // 스크롤을 항상 채팅 최하단으로 유지
   useEffect(() => {
     if (chatContainerRef.current) {
       chatContainerRef.current.scrollTop =
@@ -59,8 +60,8 @@ const AIChatbot = () => {
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter" && !event.shiftKey) {
-      event.preventDefault(); // 줄바꿈 방지
-      sendMessage();
+      event.preventDefault(); // Enter 키로 줄바꿈 방지
+      sendMessage(); // 메시지 전송
     }
   };
 

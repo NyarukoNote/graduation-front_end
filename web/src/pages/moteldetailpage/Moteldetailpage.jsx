@@ -153,6 +153,20 @@ const MotelDetailPage = () => {
           )}
         </div>
 
+        {/* 모텔 서비스 */}
+        {Array.isArray(motel["서비스"]) && motel["서비스"].length > 0 && (
+          <div className="motel-services">
+            <h2>제공 서비스</h2>
+            <div className="service-tags">
+              {motel["서비스"].map((service, index) => (
+                <span key={index} className="service-tag">
+                  {service}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+
         {/* 리뷰 비율을 원그래프로 표시 */}
         <div className="review-stats">
           <h2>리뷰 요약</h2>

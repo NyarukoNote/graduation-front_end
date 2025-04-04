@@ -32,7 +32,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "predeploy": "npm run build",
+    "predeploy": "cross-env REACT_APP_API_KEY=9FPZnm0Ph3Zpi7Zv9vdaOR%2Bmwg8GQ5BW1J%2BtPAgEpJdPRaL583suCrFEI45ZgVvYqHqUea8p4tHoXRHzW43BxQ%3D%3D npm run build",
     "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
@@ -54,6 +54,7 @@
     ]
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "gh-pages": "^6.3.0"
   }
 }

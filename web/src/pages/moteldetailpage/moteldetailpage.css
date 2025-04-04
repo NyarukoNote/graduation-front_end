@@ -197,3 +197,23 @@ h2 {
   font-size: 16px;
   color: #666;
 }
+
+.motel-services {
+  margin-top: 30px;
+}
+
+.service-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.service-tag {
+  background-color: #f0f0f0;
+  border-radius: 20px;
+  padding: 8px 14px;
+  font-size: 14px;
+  color: #333;
+  border: 1px solid #ccc;
+}
